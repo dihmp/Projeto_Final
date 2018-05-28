@@ -1,0 +1,15 @@
+<?php
+    $db = mysqli_connect('localhost','root','','arterepo');
+    session_start();
+
+    if(mysqli_connect_errno()) {
+        echo 'A conexão com o banco de dados falhou com o seguinte erro: '. mysqli_connect_error();
+        die();
+    }
+    if(isset($_SESSION['arterepo'])){
+        $uid = $_SESSION['arterepo'];
+        $permissao_usuario = mysqli_fetch_assoc($db->query("SELECT p.* FROM permissao AS p, usuario AS u WHERE u.id_usuario='$uid' AND u.id_permissao=p.id_permissao"));
+    }else{
+    	$uid = 0;
+    }
+?>
