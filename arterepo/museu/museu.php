@@ -3,7 +3,7 @@
 	require_once '../helpers/helpers.php';
 	if(isset($_GET['id'])){
 		$id = sanitize($_GET['id']);
-		$museu = mysqli_fetch_assoc($db->query("SELECT m.museu, m.pais, m.cidade, m.descricao, i.caminho FROM museu AS m, imagem AS i WHERE m.id_museu='$id' AND i.id_imagem=m.id_imagem"));
+		$museu = mysqli_fetch_assoc($db->query("SELECT m.museu, m.pais, m.cidade, m.Ano, m.descricao, i.caminho FROM museu AS m, imagem AS i WHERE m.id_museu='$id' AND i.id_imagem=m.id_imagem"));
 		$artesQ = $db->query("SELECT a.arte, a.id_arte, i.caminho FROM arte AS a, imagem AS i WHERE a.id_imagem = i.id_imagem AND a.id_museu='$id'");
 	}
 
@@ -11,7 +11,7 @@
 	include '../includes/navbar.php';
 ?>
 <div class="container">
-	<div class="row" style="padding-top: 40px">
+	<div class="row" style="padding-top: 20px">
 		<img src="<?=$museu['caminho'];?>" class="mx-auto d-block museu">
 	</div>
 	<hr>
@@ -23,6 +23,9 @@
 	</div>
 	<div class="row">
 		<b>Cidade:&nbsp;</b><?=$museu['cidade'];?>
+	</div>
+	<div class="row">
+		<b>Ano de Criação:&nbsp;</b><?=$museu['Ano'];?>
 	</div>
 	<div class="row">
 		<b>Descrição:</b> <?=$museu['descricao'];?>

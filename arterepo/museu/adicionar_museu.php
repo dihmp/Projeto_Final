@@ -12,6 +12,7 @@
 	$nome      = ((isset($_POST['nome'])      && $_POST['nome']     !='')?sanitize($_POST['nome'])     :'');
 	$cidade    = ((isset($_POST['cidade'])    && $_POST['cidade']   !='')?sanitize($_POST['cidade'])   :'');
 	$pais      = ((isset($_POST['pais'])      && $_POST['pais']     !='')?sanitize($_POST['pais'])     :'');
+	$Ano      = ((isset($_POST['Ano'])      && $_POST['Ano']     !='')?sanitize($_POST['Ano'])     :'');
 	$descricao = ((isset($_POST['descricao']) && $_POST['descricao']!='')?sanitize($_POST['descricao']):'');
 
 	$caminhoTemporario = ((isset($_POST['caminho_temporario']) && $_POST['caminho_temporario'] != '')?sanitize($_POST['caminho_temporario']):'');
@@ -82,7 +83,7 @@
 	            $db->query("INSERT INTO imagem (caminho) VALUES ('$imagemCaminho')");
 	            $id_imagem = $db->insert_id;
 			}
-			$db->query("INSERT INTO museu (museu, id_usuario, pais, cidade, descricao, id_imagem) VALUES ('$nome', '$uid', '$pais', '$cidade', '$descricao', '$id_imagem')");
+			$db->query("INSERT INTO museu (museu, id_usuario, pais, cidade, Ano, descricao, id_imagem) VALUES ('$nome', '$uid', '$pais', '$cidade', '$Ano', '$descricao', '$id_imagem')");
 			$adicionado = true;
 		}
 	}
@@ -114,6 +115,11 @@
 					<div class="form-group">
 						<label for="cidade">Cidade:</label>
 						<input type="text" id="cidade" name="cidade" class="form-control form-control-sm" value="<?=$cidade;?>">
+					</div>
+
+					<div class="form-group">
+						<label for="Ano">Ano de Criação:</label>
+						<input type="text" id="Ano" name="cidade" class="form-control form-control-sm" value="<?=$Ano;?>">
 					</div>
 
 					<div class="form-group">

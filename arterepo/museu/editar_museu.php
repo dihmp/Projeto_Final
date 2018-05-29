@@ -5,7 +5,7 @@
 	if(isset($_GET['id'])){
         $id = sanitize($_GET['id']);
 
-        $museu = mysqli_fetch_assoc($db->query("SELECT m.id_usuario, m.museu, m.cidade, m.pais, m.descricao, i.caminho, i.id_imagem FROM museu AS m, imagem AS i WHERE m.id_imagem=i.id_imagem AND m.id_museu='$id'"));
+        $museu = mysqli_fetch_assoc($db->query("SELECT m.id_usuario, m.museu, m.cidade, m.pais, m.Ano, m.descricao, i.caminho, i.id_imagem FROM museu AS m, imagem AS i WHERE m.id_imagem=i.id_imagem AND m.id_museu='$id'"));
 
         if($uid=='0'){
 			header("Location: ../index.php");
@@ -22,6 +22,7 @@
 
 		$nome      = ((isset($_POST['nome'])      && $_POST['nome']     !='')?sanitize($_POST['nome'])     :$museu['museu']);
 		$cidade    = ((isset($_POST['cidade'])    && $_POST['cidade']   !='')?sanitize($_POST['cidade'])   :$museu['cidade']);
+		$Ano       = ((isset($_POST['Ano'])    && $_POST['Ano']   !='')?sanitize($_POST['Ano'])   :$museu['Ano']);
 		$pais      = ((isset($_POST['pais'])      && $_POST['pais']     !='')?sanitize($_POST['pais'])     :$museu['pais']);
 		$descricao = ((isset($_POST['descricao']) && $_POST['descricao']!='')?sanitize($_POST['descricao']):$museu['descricao']);
 
@@ -104,7 +105,7 @@
 		            $db->query("INSERT INTO imagem (caminho) VALUES ('$imagemCaminho')");
 		            $id_imagem = $db->insert_id;
 				}
-				$db->query("UPDATE museu SET museu = '$nome', pais = '$pais', cidade = '$cidade', descricao = '$descricao', id_imagem = '$id_imagem' WHERE id_museu='$id'");
+				$db->query("UPDATE museu SET museu = '$nome', pais = '$pais', cidade = '$cidade', Ano = '$Ano',  descricao = '$descricao', id_imagem = '$id_imagem' WHERE id_museu='$id'");
 				$editado = true;
 			}
 		}
@@ -137,6 +138,13 @@
 					<div class="form-group">
 						<label for="cidade">Cidade:</label>
 						<input type="text" id="cidade" name="cidade" class="form-control form-control-sm" value="<?=$cidade;?>">
+					</div>
+
+					</div>
+
+					<div class="form-group">
+						<label for="Ano">Ano:</label>
+						<input type="text" id="Ano" name="Ano" class="form-control form-control-sm" value="<?=$Ano;?>">
 					</div>
 
 					<div class="form-group">
